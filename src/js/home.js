@@ -373,7 +373,6 @@ class FoodSearch {
     }
 
     onfoodItemClick(event) {
-        console.log("click");
         //managing highlighting
         const otherHighlightElements = document.getElementsByClassName('highlight');
         for(let i = 0; i < otherHighlightElements.length; i++)
@@ -382,11 +381,11 @@ class FoodSearch {
         }
         event.target.classList.add('highlight');
 
-        //setting some instance variables
+        //setting class instance variables
         this.$selectedFoodItem = event.target;
         this.indexOfSelectedFoodItem = this.$selectedFoodItem.id;
 
-        //actually displaying detailed nutrition info
+        //actually displaying detailed nutrition info section
         const generalInfo = this.examplePostResponse.ingredients[0].parsed[0];
         const nutritionInfo = this.examplePostResponse.totalNutrients;
 
@@ -456,11 +455,8 @@ class FoodSearch {
             console.log(data);
             const primaryResult = data.hints[0].food;
             const secondaryResults = data.hints;
-
             this.updateSearchResults(primaryResult, secondaryResults);
-
             this.addEvents();
-
         })
         .catch(error => {
               console.log(error)
@@ -519,53 +515,3 @@ class FoodSearch {
 }
 
 window.onload = () => {new FoodSearch();}
-
-
-
-
-
-
-// snippits I wanted to save
-
-// let fId = this.searchData[this.indexOfSelectedFoodItem].food.foodId;
-            // console.log(data);
-            // console.log(this.searchData);
-
-            // const url = 'https://api.edamam.com/api/food-database/v2/nutrients?app_id=85b409cf&app_key=69d004c3e3c5b967261e625baea627fc';
-            // const url = 'https://api.edamam.com/api/food-database/v2/nutrients?app_id=85b409cf&app_key=69d004c3e3c5b967261e625baea627fc';
-            // const options = {
-            //     'method': 'POST',
-            //     'headers': {
-            //         'content-type': 'application/json',
-            //         'accept': 'application/json',
-            //         'X-RapidAPI-Key': '69d004c3e3c5b967261e625baea627fc',
-            //         // 'X-RapidAPI-Host': 'edamam-food-and-grocery-database.p.rapidapi.com'
-            //         'X-RapidAPI-Host': 'api.edamam.com'
-            //     },
-            //     'body': 
-            //     {
-            //         'ingredients': 
-            //         [
-            //             {
-            //                 'quantity': 1,
-            //                 // 'measureURI': 'http://www.edamam.com/ontologies/edamam.owl#Measure_cubic_inch',
-            //                 'measureURI': 'http://www.edamam.com/ontologies/edamam.owl#c93c4f07-ba4e-4fc4-ad92-ca22b90bd566',
-                            
-            //                 'qualifiers': [],
-            //                 'foodId': 'food_bhppgmha1u27voagb8eptbp9g376'
-            //             },
-            //             // {
-            //             //     'quantity': 1,
-            //             //     'measureURI': 'http://www.edamam.com/ontologies/edamam.owl#Measure_unit',
-            //             //     'qualifiers': [],
-            //             //     'foodId': 'food_a3049hmbqj5wstaeeb3udaz6uaqv'
-            //             // }
-            //         ]
-            //     }
-            // };
-            // fetch(url, options)
-            //     .then( response => response.json() )
-            //     // .then( response => console.log(response) )
-            //     .then( data => {
-            //         console.log(data);
-            //     } );
