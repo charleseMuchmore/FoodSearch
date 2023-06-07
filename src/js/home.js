@@ -363,16 +363,16 @@ class FoodSearch {
         this.$form.addEventListener("submit", this.onFormSubmit);
         }
 
-    addEvents() {
-        this.onfoodItemClick = this.onfoodItemClick.bind(this);
+    addEventListeners() {
+        this.onFoodItemClick = this.onFoodItemClick.bind(this);
         for(let i = 0; i < this.$foodItemElements.length; i++)
         {
-            this.$foodItemElements[i].addEventListener("click", this.onfoodItemClick);
+            this.$foodItemElements[i].addEventListener("click", this.onFoodItemClick);
             this.$foodItemElements[i].setAttribute("id", i);
         }
     }
 
-    onfoodItemClick(event) {
+    onFoodItemClick(event) {
         //managing highlighting
         const otherHighlightElements = document.getElementsByClassName('highlight');
         for(let i = 0; i < otherHighlightElements.length; i++)
@@ -456,7 +456,7 @@ class FoodSearch {
             const primaryResult = data.hints[0].food;
             const secondaryResults = data.hints;
             this.updateSearchResults(primaryResult, secondaryResults);
-            this.addEvents();
+            this.addEventListeners();
         })
         .catch(error => {
               console.log(error)
@@ -473,7 +473,7 @@ class FoodSearch {
         let newSimilarResults = ``;
         let startIndex = 0;
         let endIndex = 4;
-        this.searchData = this.clear();
+        this.searchData = [];
         if (similarResults[0].food.label == topResult.label)
             {
                 startIndex = 1;
@@ -506,11 +506,6 @@ class FoodSearch {
             <div class="food-info">Carbs: ${carbs}</div>
         </div><div class="col-sm-12"></div>
       `;
-    }
-
-    clear()
-    {
-        return [];
     }
 }
 
